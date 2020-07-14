@@ -11,7 +11,7 @@ public class NicolasCastroMicroProyecto {
 		String marca = marcaIngresada.toUpperCase();
 		valorSeguro = valorCotizar(modelo);
 		// Se suma al valor cotizado otro valor dependiendo de la marca del auto
-		if (altaGama(marca) == true) {
+		if (altaGama(marca)) {
 			valorSeguro = valorSeguro + 1800;
 		} else {
 			valorSeguro = valorSeguro + 890;
