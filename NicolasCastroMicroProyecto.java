@@ -36,35 +36,17 @@ public class NicolasCastroMicroProyecto {
 
 	// Funcion que devuelve la cotizacion del seguro segun el modelo del auto
 	public static int valorCotizar(int modelo) {
-		int i = 0;
-		int valor;
-		// Se genera un indice mediante condicionales If en base al modelo ingresado
+		int valor = 350;
+		// Mediante varios If anidados se obtiene el valor cotizado en base al modelo ingresado
+		// No es posible hacerlo con un Switch ya que no se puede definir un case como un rango
 		if (modelo >= 1990 && modelo <= 1999)
-			i = 1;
-		if (modelo >= 2000 && modelo <= 2010)
-			i = 2;
-		if (modelo >= 2011 && modelo <= 2016)
-			i = 3;
-		if (modelo >= 2017 && modelo <= 2020)
-			i = 4;
-		// Se utiliza condicional Switch para definir el valor cotizado 
-		switch (i) {
-			case 1:
-				valor = 480;
-				break;
-			case 2:
-				valor = 780;
-				break;
-			case 3:
-				valor = 950;
-				break;
-			case 4:
-				valor = 1200;
-				break;
-			default:
-				valor = 350;
-				break;
-		}
+			valor = 480;
+		else if (modelo >= 2000 && modelo <= 2010)
+			valor = 780;
+		else if (modelo >= 2011 && modelo <= 2016)
+			valor = 950;
+		else if (modelo >= 2017 && modelo <= 2020)
+			valor = 1200;
 		return valor;
 	}
 }
