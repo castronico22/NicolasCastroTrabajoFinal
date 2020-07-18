@@ -17,7 +17,7 @@ public class NicolasCastroMicroProyecto {
 			valorSeguro = valorSeguro + 890;
 		}
 		// Se muestra el valor del seguro
-		JOptionPane.showMessageDialog(null, "El valor del seguro es : $" + valorSeguro);
+		JOptionPane.showMessageDialog(null, "El auto es: " + marca + " " + modelo + "\nEl valor del seguro es : $" + valorSeguro);
 	}
 
 	// Funcion que devuelve si el auto es alta gama
