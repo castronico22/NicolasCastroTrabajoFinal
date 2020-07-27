@@ -106,6 +106,8 @@ public class NicolasCastroTrabajoFinal {
 				if (!auth) {
 					JOptionPane.showMessageDialog(null, "Usuario y/o Password incorrecto",
 							"Usuario y/o Password incorrecto", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, (3-intentos) + " Intentos restantes", "Intentos restantes",
+							JOptionPane.WARNING_MESSAGE);
 					intentos++;
 				}
 			} else {
