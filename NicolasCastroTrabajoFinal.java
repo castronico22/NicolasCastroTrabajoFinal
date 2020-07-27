@@ -7,51 +7,44 @@ import javax.swing.JPasswordField;
 
 public class NicolasCastroTrabajoFinal {
 	public static void main(String[] args) {
-		// Llama la funcion login, si devuelve true ejecuta el codigo
-		if (login()) {
-			JTextField marcaIngresada = new JTextField();
-			JComboBox<String> modeloIngresado = new JComboBox<>();
-			String marca = "";
-			int modelo = 0;
-			boolean modeloAnterior = false;
+		// Si la funcion login devuelve false, no ejecuta el codigo
+		if (!login())
+			return;
+		JTextField marcaIngresada = new JTextField();
+		JComboBox<String> modeloIngresado = new JComboBox<>();
+		String marca = "";
+		int modelo = 0;
+		boolean modeloAnterior = false;
 
-			// Se agregan al ComboBox los valores del modelo
-			modeloIngresado.addItem("Anterior a 1990");
-			for (int i = 1990; i <= 2020; i++) {
-				modeloIngresado.addItem(Integer.toString(i));
+		// Se agregan al ComboBox los valores del modelo
+		modeloIngresado.addItem("Anterior a 1990");
+		for (int i = 1990; i <= 2020; i++) {
+			modeloIngresado.addItem(Integer.toString(i));
+		}
+		Object[] ingresarMarcaModelo = { "Marca: ", marcaIngresada, "Modelo: ", modeloIngresado };
+		int ingresarDatos = JOptionPane.showConfirmDialog(null, ingresarMarcaModelo, "Ingresar marca y modelo del auto",
+				JOptionPane.OK_CANCEL_OPTION);
+		if (ingresarDatos == JOptionPane.OK_OPTION) {
+			marca = marcaIngresada.getText().toUpperCase();
+			if (modeloIngresado.getSelectedItem().equals("Anterior a 1990")) {
+				// En el caso de que se seleccione Anterior a 1990, pasa modeloAnterior a true
+				modeloAnterior = true;
+			} else {
+				// Sino, se convierte el valor String a Integer para calcular el valor cotizado
+				modelo = Integer.parseInt((String) modeloIngresado.getSelectedItem());
 			}
-			Object[] ingresarMarcaModelo = { "Marca: ", marcaIngresada, "Modelo: ", modeloIngresado };
-			int ingresarDatos = JOptionPane.showConfirmDialog(null, ingresarMarcaModelo,
-					"Ingresar marca y modelo del auto", JOptionPane.OK_CANCEL_OPTION);
-			if (ingresarDatos == JOptionPane.OK_OPTION) {
-				marca = marcaIngresada.getText().toUpperCase();
-				if (modeloIngresado.getSelectedItem().equals("Anterior a 1990")) {
-					// En el caso de que se seleccione Anterior a 1990, pasa modeloAnterior a true
-					modeloAnterior = true;
-				} else {
-					// Sino, se convierte el valor String a Integer para calcular el valor cotizado
-					modelo = Integer.parseInt((String) modeloIngresado.getSelectedItem());
-				}
-				int valorSeguro = valorCotizar(modelo, modeloAnterior);
-				// Se suma al valor cotizado otro valor dependiendo de la marca del auto
-				if (altaGama(marca)) {
-					valorSeguro = valorSeguro + 1800;
-				} else {
-					valorSeguro = valorSeguro + 890;
-				}
-				// Se muestra el valor del seguro
-				if (modeloAnterior) {
-					JOptionPane
-							.showMessageDialog(
-									null, "El auto es: " + marca + " " + "Anterior a 1990"
-											+ "\nEl valor del seguro es : $" + valorSeguro,
-									"Cotizador de Seguros", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"El auto es: " + marca + " " + modelo + "\nEl valor del seguro es : $" + valorSeguro,
-							"Cotizador de Seguros", JOptionPane.INFORMATION_MESSAGE);
-				}
+			int valorSeguro = valorCotizar(modelo, modeloAnterior);
+			// Se suma al valor cotizado otro valor dependiendo de la marca del auto
+			if (altaGama(marca)) {
+				valorSeguro = valorSeguro + 1800;
+			} else {
+				valorSeguro = valorSeguro + 890;
 			}
+			// Se muestra el valor del seguro
+			JOptionPane.showMessageDialog(
+					null, "El auto es: " + marca + " " + modeloIngresado.getSelectedItem()
+							+ "\nEl valor del seguro es : $" + valorSeguro,
+					"Cotizador de Seguros", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -115,6 +108,9 @@ public class NicolasCastroTrabajoFinal {
 							"Usuario y/o Password incorrecto", JOptionPane.WARNING_MESSAGE);
 					intentos++;
 				}
+			} else {
+				// Cierra si no se selecciona OK
+				break;
 			}
 		} while (!auth & (intentos <= 3));
 		// Si autentica, muestra mensaje de bienvenida
