@@ -102,13 +102,19 @@ public class NicolasCastroTrabajoFinal {
 						auth = true;
 					}
 				}
-				// Si no coincide, suma 1 intento y vuelve a pedir credenciales
+				// Si no coincide, muestra los intentos restantes y vuelve a pedir credenciales
 				if (!auth) {
-					JOptionPane.showMessageDialog(null, "Usuario y/o Password incorrecto",
-							"Usuario y/o Password incorrecto", JOptionPane.WARNING_MESSAGE);
-					JOptionPane.showMessageDialog(null, (3-intentos) + " Intentos restantes", "Intentos restantes",
-							JOptionPane.WARNING_MESSAGE);
-					intentos++;
+					if (intentos < 3) {
+						JOptionPane.showMessageDialog(null,
+								"Usuario y/o Password incorrecto\n" + (3 - intentos) + " Intentos restantes",
+								"Usuario y/o Password incorrecto", JOptionPane.WARNING_MESSAGE);
+						intentos++;
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Usuario y/o Password incorrecto\n" + "Se supero en numero de intentos",
+								"Usuario y/o Password incorrecto", JOptionPane.WARNING_MESSAGE);
+						intentos++;
+					}
 				}
 			} else {
 				// Cierra si no se selecciona OK
@@ -116,13 +122,8 @@ public class NicolasCastroTrabajoFinal {
 			}
 		} while (!auth & (intentos <= 3));
 		// Si autentica, muestra mensaje de bienvenida
-		if (auth) {
+		if (auth)
 			JOptionPane.showMessageDialog(null, "Bienvenido " + usrAuth, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-			// Sino, muestra mensaje de numero de intentos superados y se cierra
-		} else if (intentos > 3) {
-			JOptionPane.showMessageDialog(null, "Se supero en numero de intentos", "Se supero en numero de intentos",
-					JOptionPane.WARNING_MESSAGE);
-		}
 		return auth;
 	}
 }
